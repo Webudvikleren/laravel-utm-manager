@@ -1,4 +1,4 @@
-# Laravel UTM Tracker
+# Laravel UTM Manager
 
 📈 Simple UTM tracking middleware for Laravel. Capture UTM parameters from the URL and make them easily accessible via session or helper methods. Great for tracking marketing sources across forms, registrations, or orders.
 

@@ -1,5 +1,5 @@
 {
-  "name": "webudvikleren/laravel-utm-tracker",
+  "name": "webudvikleren/laravel-utm-manager",
   "description": "A simple Laravel package to capture and manage UTM parameters.",
   "type": "library",
   "license": "MIT",
