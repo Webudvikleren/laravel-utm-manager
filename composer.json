@@ -1,0 +1,25 @@
+{
+  "name": "webudvikleren/laravel-utm-tracker",
+  "description": "A simple Laravel package to capture and manage UTM parameters.",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "JonasSchultz\\UtmTracker\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Webudvikleren\\UtmManager\\UtmManagerServiceProvider"
+      ],
+      "aliases": {
+        "Utm": "Webudvikleren\\UtmManager\\Facades\\Utm"
+      }
+    }
+  },
+  "require": {
+    "php": "^8.0",
+    "illuminate/support": "^9.0|^10.0"
+  }
+}
