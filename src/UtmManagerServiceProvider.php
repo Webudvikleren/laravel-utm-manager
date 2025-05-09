@@ -4,7 +4,7 @@ namespace Webudvikleren\UtmManager;
 
 use Illuminate\Support\ServiceProvider;
 
-class UtmTrackerServiceProvider extends ServiceProvider
+class UtmManagerServiceProvider extends ServiceProvider
 {
     public function boot()
     {
