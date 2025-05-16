@@ -9,8 +9,10 @@ trait HasUtmRelation
     public static function bootHasUtmRelation()
     {
         static::created(function ($model) {
-            if (method_exists($model, 'utmVisit')) {
-                $model->utmVisit()->create(Utm::all());
+            if (Utm::hasAny()) {
+                if (method_exists($model, 'utmVisit')) {
+                    $model->utmVisit()->create(Utm::all());
+                }
             }
         });
     }
