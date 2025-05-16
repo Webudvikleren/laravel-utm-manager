@@ -10,7 +10,9 @@
 - Configurable list of UTM keys
 - Store in session (default) or extend for other storage
 - Facade for easy access: `Utm::get('utm_source')`
-- Optional trait for auto-filling UTM data on models
+- Trait for auto-filling UTM data directly on Eloquent models
+- Trait for attaching UTM data to a related model (`utmVisit`)
+- Artisan command to generate a migration dynamically
 
 ---
 
@@ -78,14 +80,78 @@ class Lead extends Model
 
 When creating the model, UTM fields will be auto-filled (if present in the session).
 
+### 4. Store UTM data in a related model
+If you want to store UTM data in a separate model (e.g., `utm_visits`), use the `HasUtmRelation` trait:
+
+```bash
+use Webudvikleren\UtmManager\Traits\HasUtmRelation;
+
+class User extends Model
+{
+    use HasUtmRelation;
+
+    public function utmVisit()
+    {
+        return $this->hasOne(\App\Models\UtmVisit::class);
+    }
+}
+```
+
+Then define the related model like this:
+
+```bash
+class UtmVisit extends Model
+{
+    protected $table = 'utm_visits'; // or load from config('utm.table')
+
+    protected $fillable = [
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}
+```
+
+The related model class and table name are both configurable via `config/utm.php`.
+
+### 5. Generate a migration for related UTM data
+The package includes an Artisan command to generate a migration based on the configured UTM keys and table name.
+
+```bash
+php artisan utm:make-migration
+php artisan migrate
+```
+
+This will generate a migration with the correct user_id foreign key and all defined UTM columns.
+
+### 6. Publish the default UtmVisit model
+
+To create a prebuilt `UtmVisit` model in your `app/Models` folder:
+
+```bash
+php artisan utm:publish-model
+````
+
+You can then customize the model or change the class in `config/utm.php`.
+
 ## ⚙️ Configuration
 
 ```bash
 // config/utm.php
 
 return [
+
+    // Where to store UTM data: 'session' (default)
     'storage' => 'session',
 
+    // Which UTM keys to track
     'utm_keys' => [
         'utm_source',
         'utm_medium',
@@ -93,7 +159,14 @@ return [
         'utm_term',
         'utm_content',
     ],
+
+    // Table name for storing UTM visits (if using HasUtmRelation)
+    'table' => 'utm_visits',
+
+    // Fully qualified class name for related UTM model
+    'related_model' => \App\Models\UtmVisit::class,
 ];
+
 ```
 
 ## 📦 Example URL

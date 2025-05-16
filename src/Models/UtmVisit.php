@@ -1,0 +1,23 @@
+<?php
+
+namespace Webudvikleren\UtmManager\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class UtmVisit extends Model
+{
+    protected $table = 'utm_visits';
+
+    protected $fillable = [
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_term',
+        'utm_content',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(config('auth.providers.users.model'));
+    }
+}

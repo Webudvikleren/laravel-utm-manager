@@ -13,6 +13,13 @@ class UtmManagerServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->app['router']->aliasMiddleware('utm.capture', Http\Middleware\CaptureUtmParameters::class);
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \Webudvikleren\UtmManager\Commands\PublishUtmModelCommand::class,
+                \Webudvikleren\UtmManager\Commands\UtmMakeMigrationCommand::class,
+            ]);
+        }
     }
 
     public function register()
