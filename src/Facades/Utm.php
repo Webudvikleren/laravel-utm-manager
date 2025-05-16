@@ -10,4 +10,16 @@ class Utm extends Facade
     {
         return 'utm';
     }
+
+    public function hasAny(): bool
+    {
+        $utmData = $this->all();
+        foreach ($utmData as $value) {
+            if (!is_null($value) && $value !== '') {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
