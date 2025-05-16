@@ -1,9 +1,10 @@
 <?php
 
-namespace Webudvikleren\UtmManager\Commands;
+namespace Webudvikleren\UtmManager\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use function Webudvikleren\UtmManager\Commands\app_path;
 
 class PublishUtmModelCommand extends Command
 {

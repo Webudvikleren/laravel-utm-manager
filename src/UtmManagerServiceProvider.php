@@ -16,8 +16,8 @@ class UtmManagerServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Webudvikleren\UtmManager\Commands\PublishUtmModelCommand::class,
-                \Webudvikleren\UtmManager\Commands\UtmMakeMigrationCommand::class,
+                \Webudvikleren\UtmManager\Console\Commands\PublishUtmModelCommand::class,
+                \Webudvikleren\UtmManager\Console\Commands\UtmMakeMigrationCommand::class,
             ]);
         }
     }

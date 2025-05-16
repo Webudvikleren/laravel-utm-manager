@@ -1,6 +1,6 @@
 <?php
 
-namespace Webudvikleren\UtmManager\Commands;
+namespace Webudvikleren\UtmManager\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
